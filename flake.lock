@@ -178,11 +178,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1719650661,
-        "narHash": "sha256-qI2NqUL+qndDSTpB9ZW6WGDV6kDn6R73pvWKErUIi9s=",
+        "lastModified": 1719667583,
+        "narHash": "sha256-3I3hzoJgpGKp2Zq+Tt8MwHp+yw607WR/sAt9YAET6ko=",
         "owner": "auvred",
         "repo": "neovim-flake",
-        "rev": "888cc60d7b05140fae2b17e352d5b7f2074a86f6",
+        "rev": "9da463d7c54bfb1385b5aa917d80abf4f29cdeaa",
         "type": "github"
       },
       "original": {
