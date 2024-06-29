@@ -12,6 +12,9 @@ final: prev: {
             hash = "sha256-WGisoaIPgJimFGhnLctWmRTE/ycRpCshpPq2ZFdlyAM=";
           };
           cargoHash = "sha256-hKeJaIGUZpbuca3IPN1Uq4bamgImfYNvCRiVDbriHPA=";
+          patches = [
+            ./use-system-shell-in-key-menu.patch
+          ];
         });
   };
 }

@@ -1,0 +1,46 @@
+diff --git a/src/ui/key_menu.rs b/src/ui/key_menu.rs
+index 9fb5780..ea42178 100644
+--- a/src/ui/key_menu.rs
++++ b/src/ui/key_menu.rs
+@@ -16,6 +16,7 @@ use crate::config::{
+ pub struct KeyMenuWidget {
+     power_config: PowerControlConfig,
+     switcher_config: SwitcherConfig,
++    system_shell: String,
+ }
+ 
+ impl PowerControl {
+@@ -31,10 +32,11 @@ impl PowerControl {
+ }
+ 
+ impl KeyMenuWidget {
+-    pub fn new(power_config: PowerControlConfig, switcher_config: SwitcherConfig) -> Self {
++    pub fn new(power_config: PowerControlConfig, switcher_config: SwitcherConfig, system_shell: String) -> Self {
+         Self {
+             power_config,
+             switcher_config,
++            system_shell,
+         }
+     }
+ 
+@@ -100,7 +102,7 @@ impl KeyMenuWidget {
+             .chain(self.power_config.entries.0.iter())
+         {
+             if key_code == get_key(&power_control.key) {
+-                let cmd_status = Command::new("bash")
++                let cmd_status = Command::new(&self.system_shell)
+                     .arg("-c")
+                     .arg(power_control.cmd.clone())
+                     .output();
+diff --git a/src/ui/mod.rs b/src/ui/mod.rs
+index 00ce6fc..81eba78 100644
+--- a/src/ui/mod.rs
++++ b/src/ui/mod.rs
+@@ -288,6 +288,7 @@ impl LoginForm {
+                 key_menu: KeyMenuWidget::new(
+                     config.power_controls.clone(),
+                     config.environment_switcher.clone(),
++                    config.system_shell.clone(),
+                 ),
+                 environment: Arc::new(Mutex::new(SwitcherWidget::new(
+                     crate::post_login::get_envs(&config)

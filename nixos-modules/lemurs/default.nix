@@ -36,6 +36,24 @@ in {
       in {
         tty = virtualTerminalNumber;
         pam_service = pamServiceName;
+        system_shell = "${pkgs.bash}/bin/bash";
+
+        power_controls.base_entries = [
+          {
+            hint = "Shutdown";
+            hint_color = "dark gray";
+            hint_modifiers = "";
+            key = "F1";
+            cmd = "${pkgs.systemd}/bin/systemctl poweroff";
+          }
+          {
+            hint = "Reboot";
+            hint_color = "dark gray";
+            hint_modifiers = "";
+            key = "F2";
+            cmd = "${pkgs.systemd}/bin/systemctl reboot";
+          }
+        ];
 
         x11 = {
           xserver_path = startXServer;
