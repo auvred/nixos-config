@@ -1,0 +1,13 @@
+diff --git a/src/bin/uair/session.rs b/src/bin/uair/session.rs
+index f3056ee..418fc9a 100644
+--- a/src/bin/uair/session.rs
++++ b/src/bin/uair/session.rs
+@@ -35,7 +35,7 @@ impl Session {
+ 	pub fn run_command(&self) -> io::Result<()> {
+ 		if !self.command.is_empty() {
+ 			let duration = humantime::format_duration(self.duration).to_string();
+-			process::Command::new("sh")
++			process::Command::new("/bin/sh")
+ 				.env("name", &self.name)
+ 				.env("duration", duration)
+ 				.arg("-c")
