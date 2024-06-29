@@ -6,11 +6,13 @@
   virtualTerminalNumber = 2;
   pamServiceName = "lemurs";
 in {
-  services.xserver.enable = true;
-  services.xserver.videoDrivers = ["nvidia"];
-  services.xserver.dpi = 90;
-  # ligthdm is enabled by default (when services.xserver.enable is true), so we need to turn it off
-  services.xserver.displayManager.lightdm.enable = false;
+  services.xserver = {
+    enable = true;
+    videoDrivers = ["nvidia"];
+    dpi = 90;
+    # ligthdm is enabled by default (when services.xserver.enable is true), so we need to turn it off
+    displayManager.lightdm.enable = false;
+  };
 
   systemd.services.lemurs = {
     aliases = ["display-manager.service"];
