@@ -6,6 +6,7 @@
 }: {
   xsession = {
     enable = true;
+    scriptPath = ".xsession-hm";
     windowManager.i3 = {
       enable = true;
       config = {

@@ -19,26 +19,30 @@ in {
     after = ["systemd-user-sessions.service" "plymouth-quit-wait.service" "getty@tty${toString virtualTerminalNumber}.service"];
     wantedBy = ["multi-user.target"];
     serviceConfig = let
-      lemursConfig = (pkgs.formats.toml {}).generate "lemurs-config.toml" {
+      lemursConfig = (pkgs.formats.toml {}).generate "lemurs-config.toml" (let
+        startXServer = let dm = config.services.xserver.displayManager; in "${dm.xserverBin} ${toString dm.xserverArgs}";
+        startHomeManagerXSession = pkgs.writeTextFile {
+          name = "lemurs-hm-xsession";
+          text = ''
+            USERXSESSION=$HOME/.xsession-hm
+            if [ -f "$USERXSESSION" ]; then
+              exec "$USERXSESSION"
+            fi
+            exec ${pkgs.xorg.xmessage}/bin/xmessage -center -buttons OK:0 -default OK "Sorry, can't find xsession start script ($USERXSESSION)."
+          '';
+          executable = true;
+          destination = "/hm-xsession";
+        };
+      in {
         tty = virtualTerminalNumber;
         pam_service = pamServiceName;
 
         x11 = {
-          xserver_path = let dm = config.services.xserver.displayManager; in "${dm.xserverBin} ${toString dm.xserverArgs}";
+          xserver_path = startXServer;
           xsetup_path = "${./xsetup.sh}";
-          scripts_path = "${pkgs.writeTextFile {
-            name = "lemurs-placeholder";
-            # ./xsetup.sh sources $HOME/.xsession
-            # We hope that home-manager will start window manager in
-            # $HOME/.xsession, so we leave this script empty (lemurs thinks
-            # that it will contain the x11 setup, but in fact the setup is
-            # contained in $HOME/.xsession)
-            text = "";
-            executable = true;
-            destination = "/auto"; # "auto" will be displayed as the x11 session name
-          }}";
+          scripts_path = "${startHomeManagerXSession}";
         };
-      };
+      });
     in {
       ExecStart = "${pkgs.lemurs}/bin/lemurs --config ${lemursConfig}";
       StandardInput = "tty";
