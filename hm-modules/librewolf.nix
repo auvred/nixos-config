@@ -14,6 +14,7 @@
       "privacy.clearOnShutdown.openWindows" = false;
       "privacy.clearOnShutdown.sessions" = false;
       "privacy.clearOnShutdown.siteSettings" = false;
+      "privacy.resistFingerprinting.autoDeclineNoUserInputCanvasPrompts" = false;
       "browser.sessionstore.resume_from_crash" = false;
       "browser.uidensity" = 1;
       "layout.css.devPixelsPerPx" = "0.85";

@@ -7,6 +7,7 @@
     escapeTime = 0;
     historyLimit = 50000;
     keyMode = "vi";
+    terminal = "tmux-256color";
     extraConfig = ''
       set -g renumber-windows on
       set -g status-bg color235

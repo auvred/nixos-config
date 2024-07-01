@@ -7,6 +7,7 @@
       ll = "ls -lhA";
     };
     history = {
+      path = "$XDG_DATA_HOME/zsh_history";
       ignoreAllDups = true;
       ignoreDups = true;
       ignoreSpace = true;

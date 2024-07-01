@@ -9,6 +9,7 @@
     ./i3.nix
     ./librewolf.nix
     ./neovim.nix
+    ./nodejs.nix
     ./ripgrep.nix
     ./tmux.nix
     ./uair.nix
@@ -24,5 +25,10 @@
       fd
       jq
     ];
+
+    sessionVariables = {
+      PULUMI_HOME = "$XDG_DATA_HOME/pulumi";
+      CARGO_HOME = "$XDG_DATA_HOME/cargo";
+    };
   };
 }

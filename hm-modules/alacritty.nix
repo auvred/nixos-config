@@ -2,6 +2,9 @@
   programs.alacritty = {
     enable = true;
     settings = {
+      env = {
+        TERM = "alacritty";
+      };
       mouse.hide_when_typing = true;
       font = {
         normal.family = "CaskaydiaMono Nerd Font Mono";

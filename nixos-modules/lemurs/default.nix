@@ -37,6 +37,7 @@ in {
         tty = virtualTerminalNumber;
         pam_service = pamServiceName;
         system_shell = "${pkgs.bash}/bin/bash";
+        max_display_length = 15;
 
         power_controls.base_entries = [
           {
