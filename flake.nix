@@ -25,6 +25,7 @@
         {
           nixpkgs.overlays = [
             (import ./overlays/lemurs)
+            (import ./overlays/podman-compose)
             (import ./overlays/runst)
             (import ./overlays/uair)
             (final: prev: {auvred-neovim = neovim-flake.packages.${system}.nvim;})
