@@ -1,0 +1,41 @@
+diff --git a/podman_compose.py b/podman_compose.py
+index 200ce78..d0574e5 100755
+--- a/podman_compose.py
++++ b/podman_compose.py
+@@ -2486,9 +2486,13 @@ async def compose_up(compose: PodmanCompose, args):
+         log.info("recreating: done\n\n")
+     # args.no_recreate disables check for changes (which is not implemented)
+ 
++    if args.wait:
++        args.detach = True
++
+     podman_command = "run" if args.detach and not args.no_start else "create"
+ 
+     await create_pods(compose, args)
++    tasks = []
+     for cnt in compose.containers:
+         if cnt["_service"] in excluded:
+             log.debug("** skipping: %s", cnt["name"])
+@@ -2497,6 +2501,9 @@ async def compose_up(compose: PodmanCompose, args):
+         subproc = await compose.podman.run([], podman_command, podman_args)
+         if podman_command == "run" and subproc is not None:
+             await compose.podman.run([], "start", [cnt["name"]])
++            if (args.wait):
++                tasks.append(compose.podman.run([], "wait", ["--condition", "healthy", "--condition", "unhealthy", cnt["name"]]))
++    await asyncio.gather(*tasks)
+     if args.no_start or args.detach or args.dry_run:
+         return
+     # TODO: handle already existing
+@@ -3125,6 +3132,12 @@ def compose_up_parse(parser):
+         help="Return the exit code of the selected service container. "
+         "Implies --abort-on-container-exit.",
+     )
++    parser.add_argument(
++        "--wait",
++        action="store_true",
++        help="Wait for services to be running|healthy. Implies detached mode.",
++    )
++
+ 
+ 
+ @cmd_parse(podman_compose, "down")
