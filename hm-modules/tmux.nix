@@ -12,6 +12,7 @@
       set -g renumber-windows on
       set -g status-bg color235
       set -g status-fg white
+      set -g detach-on-destroy off
     '';
   };
 }
