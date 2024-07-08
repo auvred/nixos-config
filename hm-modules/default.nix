@@ -24,6 +24,8 @@
       cool-retro-term
       fd
       jq
+      nix-diff
+      qmk
     ];
 
     sessionVariables = {
