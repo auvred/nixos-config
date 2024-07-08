@@ -26,6 +26,8 @@
     networkmanager.enable = true;
   };
 
+  hardware.keyboard.qmk.enable = true;
+
   users = {
     mutableUsers = false;
     users.auvred = {
