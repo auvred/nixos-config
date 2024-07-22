@@ -31,6 +31,7 @@
     sessionVariables = {
       PULUMI_HOME = "$XDG_DATA_HOME/pulumi";
       CARGO_HOME = "$XDG_DATA_HOME/cargo";
+      NX_NO_CLOUD = "true";
     };
   };
 }

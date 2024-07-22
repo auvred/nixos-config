@@ -32,7 +32,7 @@
     mutableUsers = false;
     users.auvred = {
       isNormalUser = true;
-      extraGroups = ["wheel"];
+      extraGroups = ["wheel" "wireshark"];
       home = "/home/auvred";
       createHome = true;
       hashedPassword = "$y$j9T$PGQ2y/7y8s75LNmZbzJsD1$RuE3vBao55zBsIKCigxTCQr.y8wIcaJoTymGorlCAA6";
@@ -44,6 +44,10 @@
     zsh.enable = true;
     # https://nix-community.github.io/home-manager/index.xhtml#_why_do_i_get_an_error_message_about_literal_ca_desrt_dconf_literal_or_literal_dconf_service_literal
     dconf.enable = true;
+    wireshark = {
+      enable = true;
+      package = pkgs.wireshark;
+    };
   };
 
   fonts = {
