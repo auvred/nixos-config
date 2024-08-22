@@ -28,6 +28,10 @@
 
   hardware.keyboard.qmk.enable = true;
 
+  services.udev.packages = with pkgs; [
+    openocd
+  ];
+
   users = {
     mutableUsers = false;
     users.auvred = {
