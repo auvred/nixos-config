@@ -3,7 +3,6 @@
   xdg.configFile = {
     "flameshot/flameshot.ini".source = (pkgs.formats.ini {}).generate "flameshot.ini" {
       General = {
-        checkForUpdates = false;
         disabledTrayIcon = true;
         savePath = "/home/auvred/Downloads";
         savePathFixed = true;
