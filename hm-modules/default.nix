@@ -26,6 +26,8 @@
       jq
       nix-diff
       qmk
+      zip
+      unzip
     ];
 
     sessionVariables = {
